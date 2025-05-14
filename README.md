@@ -49,7 +49,7 @@ This project aims to explore the implementation of sports game mechanics, goalke
 
 ---
 
-## C++ Features
+## Highlighted functions in C++
 
 ### 📌 **Cards and Ball Properties Modification**
 The card system allows you to modify the ball's properties. Example:
