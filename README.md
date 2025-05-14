@@ -4,7 +4,7 @@
 
 ## 🔄 Demo en acción
 
-![Gameplay Demo](PenaltiesKickPrototype.gif)
+![Gameplay Demo](TestPenaltiesKick.gif)
 
 ---
 
