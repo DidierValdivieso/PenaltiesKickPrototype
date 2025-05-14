@@ -130,3 +130,6 @@ void UGameStatsWidget::UpdateStats(int32 Goals, int32 Turn, int32 Moral)
 }
 ```
 ---
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
