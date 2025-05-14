@@ -1,5 +1,13 @@
 # Penalties Kick Prototype
 
+---
+
+## 🔄 Demo en acción
+
+![Gameplay Demo](PenaltiesKickPrototype.gif)
+
+---
+
 ## Descripción
 
 **PenaltiesKickPrototype** es un juego de simulación de penales desarrollado en **Unreal Engine 5** utilizando **C++**. El objetivo del juego es permitir al jugador realizar tiros de penal y enfrentar al portero en un entorno realista, con mecánicas de juego personalizadas, como el uso de cartas que alteran las propiedades del balón y el puntaje en las rondas de penal.
@@ -90,7 +98,7 @@ void AMyGameState::ActualizarHUD()
 ```
 ## Instalación
 
-1. Clona el repositorio:
+Clona el repositorio:
 
 ```bash
    git clone https://github.com/DidierValdivieso/PenaltiesKickPrototype.git
