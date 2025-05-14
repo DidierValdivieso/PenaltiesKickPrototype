@@ -35,6 +35,8 @@ This project aims to explore the implementation of sports game mechanics, goalke
 - **PenaltiesKickGameMode**: Controls game logic, including character creation, round management, and scoring.
 - **HUD (Heads-Up Display)**: Displays goals scored, turns, and player morale points.
 
+---
+
 ## C++ Features
 
 ### 1. **Cards and Ball Properties Modification**
@@ -115,3 +117,4 @@ void UGameStatsWidget::UpdateStats(int32 Goals, int32 Turn, int32 Moral)
         MoralText->SetText(FText::Format(FText::FromString("Moral: {0}"), FText::AsNumber(Moral)));
 }
 ```
+---
