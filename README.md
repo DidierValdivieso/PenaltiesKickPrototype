@@ -14,7 +14,7 @@
 
 Este proyecto tiene como propósito explorar la implementación de mecánicas de juegos de deportes, inteligencia artificial de portero, y el uso de cartas con efectos en las físicas del balón, todo implementado directamente en C++.
 
-## Características
+## 🛠️ Características principales
 
 - **Sistema de Penaltis**: El jugador se enfrenta a un portero y tiene que lanzar un penal. El portero reacciona a los tiros utilizando un sistema básico de IA.
 - **Cartas de Poder**: Se implementa una mecánica en la que el jugador puede usar cartas que afectan al balón. Ejemplo de carta: **Botas de Fuego**, que aumenta la potencia del tiro pero disminuye la precisión.
