@@ -29,15 +29,22 @@ This project aims to explore the implementation of sports game mechanics, goalke
 ## 🚀 Technologies
 
 🔹**Unreal Engine 5**: Used for game development.
+
 🔹**C++**: All game logic (from physics to card and AI interactions) is implemented in C++.
+
 🔹**BluePrints**: The game does not use Blueprints; everything is written in C++ code to ensure greater control and performance.
+
 
 ## 🖥️ Project Structure
 
 🔹**KickerCharacter**: Represents the player taking the kick. Includes the logic for applying cards that modify the ball's properties.
+
 🔹**BallActor**: Class that handles the ball's properties, including physics, goalkeeper interaction, and goal detection.
+
 🔹**CardItemActor**: Represents cards that can affect the ball, such as **Fire Boots**, which modify power and accuracy.
+
 🔹**PenaltiesKickGameMode**: Controls game logic, including character creation, round management, and scoring.
+
 🔹**HUD (Heads-Up Display)**: Displays goals scored, turns, and player morale points.
 
 ---
