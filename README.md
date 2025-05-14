@@ -14,11 +14,17 @@ This project aims to explore the implementation of sports game mechanics, goalke
 ## 🛠️ Main Features
 
 🔹**Penalty Kick System**: The player faces a goalkeeper and must take a penalty. The goalkeeper reacts to the shots using a basic AI system.
+
 🔹**Power Cards**: A mechanic is implemented where the player can use cards that affect the ball. Example card: **Boots of Fire**, which increases shot power but decreases accuracy.
+
 🔹**Penalty Rounds**: Each player has a maximum of two shots to score a goal. The round system is controlled through **GameMode** logic.
+
 🔹**Morale Points**: The player obtains morale points per turn, which can be consumed to use cards that modify the ball's characteristics (power, accuracy, etc.).
+
 🔹**Scoring System**: A tally is kept of goals scored, morale points, and turns, all accessible from a HUD implemented in C++.
+
 🔹**Goal Logic**: Goal detection is performed using **LineTraces** to check if the ball has crossed the goal line.
+
 
 ## 🚀 Technologies
 
