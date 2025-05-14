@@ -1,43 +1,44 @@
 # Penalties Kick Prototype
-**PenaltiesKickPrototype** es un juego de simulación de penales desarrollado en **Unreal Engine 5** utilizando **C++**. El objetivo del juego es permitir al jugador realizar tiros de penal y enfrentar al portero en un entorno realista, con mecánicas de juego personalizadas, como el uso de cartas que alteran las propiedades del balón y el puntaje en las rondas de penal.
+**PenaltiesKickPrototype** is a penalty kick simulation game developed in **Unreal Engine 5** using **C++**. The objective of the game is to allow the player to take penalty kicks and face the goalkeeper in a realistic environment, with custom gameplay mechanics, such as the use of cards that alter the ball's properties and the score in penalty rounds.
 
-Este proyecto tiene como propósito explorar la implementación de mecánicas de juegos de deportes, inteligencia artificial de portero, y el uso de cartas con efectos en las físicas del balón, todo implementado directamente en C++.
+This project aims to explore the implementation of sports game mechanics, goalkeeper artificial intelligence, and the use of cards that affect ball physics, all implemented directly in C++.
 
 ---
 
-## 🔄 Demo en acción
+## 🔄 Demo in action
 
 ![Gameplay Demo](TestPenaltiesKick.gif)
 
 ---
 
-## 🛠️ Características principales
+## 🛠️ Main Features
 
-- **Sistema de Penaltis**: El jugador se enfrenta a un portero y tiene que lanzar un penal. El portero reacciona a los tiros utilizando un sistema básico de IA.
-- **Cartas de Poder**: Se implementa una mecánica en la que el jugador puede usar cartas que afectan al balón. Ejemplo de carta: **Botas de Fuego**, que aumenta la potencia del tiro pero disminuye la precisión.
-- **Rondas de Penaltis**: Cada jugador tiene un máximo de dos disparos para marcar un gol. El sistema de rondas se controla a través de la lógica del **GameMode**.
-- **Puntos de Moral**: El jugador obtiene puntos de moral por turno, que pueden ser consumidos para usar cartas que modifican las características del balón (potencia, precisión, etc.).
-- **Sistema de Puntuación**: Se lleva un conteo de los goles anotados, los puntos de moral, y los turnos, todo accesible desde un HUD implementado en C++.
-- **Lógica de Goles**: La detección de goles se realiza mediante **LineTraces** para comprobar si el balón ha cruzado la línea de gol.
-  
-## Tecnologías
+- **Penalty Kick System**: The player faces a goalkeeper and must take a penalty. The goalkeeper reacts to the shots using a basic AI system.
+- **Power Cards**: A mechanic is implemented where the player can use cards that affect the ball. Example card: **Boots of Fire**, which increases shot power but decreases accuracy.
+- **Penalty Rounds**: Each player has a maximum of two shots to score a goal. The round system is controlled through **GameMode** logic.
+- **Morale Points**: The player obtains morale points per turn, which can be consumed to use cards that modify the ball's characteristics (power, accuracy, etc.).
+- **Scoring System**: A tally is kept of goals scored, morale points, and turns, all accessible from a HUD implemented in C++.
 
-- **Unreal Engine 5**: Utilizado para el desarrollo del juego.
-- **C++**: Toda la lógica del juego (desde la física hasta la interacción de las cartas y la IA) está implementada en C++.
-- **BluePrints**: El juego no utiliza Blueprints; todo está hecho desde código C++ para garantizar un mayor control y rendimiento.
+- **Goal Logic**: Goal detection is performed using **LineTraces** to check if the ball has crossed the goal line.
 
-## Estructura del Proyecto
+## Technologies
 
-- **PateadorCharacter**: Representa al jugador que realiza el tiro. Incluye la lógica para aplicar cartas que modifican las propiedades del balón.
-- **BallActor**: Clase que maneja las propiedades del balón, incluidas las físicas, la interacción con el portero, y la detección de goles.
-- **CardItemActor**: Representa las cartas que pueden afectar al balón, como las **Botas de Fuego**, que modifican la potencia y precisión.
-- **PenaltiesKickGameMode**: Controla la lógica del juego, incluyendo la creación de personajes, la gestión de rondas y el puntaje.
-- **HUD (Heads-Up Display)**: Muestra en pantalla los goles anotados, los turnos y los puntos de moral del jugador.
+- **Unreal Engine 5**: Used for game development.
+- **C++**: All game logic (from physics to card and AI interactions) is implemented in C++.
+- **BluePrints**: The game does not use Blueprints; everything is written in C++ code to ensure greater control and performance.
 
-## Funcionalidades en C++
+## Project Structure
 
-### 1. **Cartas y Modificación de Propiedades del Balón**
-El sistema de cartas permite modificar las propiedades del balón. Ejemplo:
+- **KickerCharacter**: Represents the player taking the kick. Includes the logic for applying cards that modify the ball's properties.
+- **BallActor**: Class that handles the ball's properties, including physics, goalkeeper interaction, and goal detection.
+- **CardItemActor**: Represents cards that can affect the ball, such as **Fire Boots**, which modify power and accuracy.
+- **PenaltiesKickGameMode**: Controls game logic, including character creation, round management, and scoring.
+- **HUD (Heads-Up Display)**: Displays goals scored, turns, and player morale points.
+
+## C++ Features
+
+### 1. **Cards and Ball Properties Modification**
+The card system allows you to modify the ball's properties. Example:
 
 ```cpp
 void ABallActor::ActivateFireBootsEffect()
@@ -53,8 +54,8 @@ void ABallActor::ActivateFireBootsEffect()
     UE_LOG(LogTemp, Warning, TEXT("Fire Boots activated: Power = %f, PrecisionOffset = %f"), Power_shoot, PrecisionOffset);
 }
 ```
-### 2. **Detección de Goles**
-Los goles se detectan usando un **LineTrace** en el método `PerformLineTrace()` de la clase `BallActor`. Si el balón cruza la línea de gol, se contabiliza como gol.
+### 2. **Goal Detection**
+Goals are detected using a **LineTrace** in the `PerformLineTrace()` method of the `BallActor` class. If the ball crosses the goal line, it is counted as a goal.
 
 ```cpp
 bHitSuccess = GetWorld()->LineTraceSingleByChannel(
@@ -77,8 +78,8 @@ bHitSuccess = GetWorld()->LineTraceSingleByChannel(
         }
     }
 ```
-### 3. **Puntos de Moral y Turnos**
-Cada vez que el jugador realiza un penal, se suman puntos de moral, que pueden ser consumidos para usar cartas. Los turnos también se gestionan a través del **GameMode**.
+### 3. **Morale Points and Turns**
+Each time a player takes a penalty, morale points are added, which can be used to use cards. Turns are also managed through **GameMode**.
 
 ```cpp
 if (GameplayWidgetClass)
@@ -95,8 +96,8 @@ if (GameplayWidgetClass)
         }
     }
 ```
-### 4. **HUD en C++**
-El HUD muestra los goles, turnos y puntos de moral utilizando la clase `UUserWidget` y una clase `GameState` que gestiona los datos.
+### 4. **HUD in C++**
+The HUD displays goals, turns, and morale points using the `UUserWidget` class and a `GameState` class that manages the data.
 
 ```cpp
 #include "GameStatsWidget.h"
