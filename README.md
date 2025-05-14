@@ -1,4 +1,4 @@
-# Penalties Kick Prototype
+# 🎮 Penalties Kick Prototype
 **PenaltiesKickPrototype** is a penalty kick simulation game developed in **Unreal Engine 5** using **C++**. The objective of the game is to allow the player to take penalty kicks and face the goalkeeper in a realistic environment, with custom gameplay mechanics, such as the use of cards that alter the ball's properties and the score in penalty rounds.
 
 This project aims to explore the implementation of sports game mechanics, goalkeeper artificial intelligence, and the use of cards that affect ball physics, all implemented directly in C++.
@@ -21,13 +21,13 @@ This project aims to explore the implementation of sports game mechanics, goalke
 
 - **Goal Logic**: Goal detection is performed using **LineTraces** to check if the ball has crossed the goal line.
 
-## Technologies
+## 🚀 Technologies
 
 - **Unreal Engine 5**: Used for game development.
 - **C++**: All game logic (from physics to card and AI interactions) is implemented in C++.
 - **BluePrints**: The game does not use Blueprints; everything is written in C++ code to ensure greater control and performance.
 
-## Project Structure
+## 🖥️ Project Structure
 
 - **KickerCharacter**: Represents the player taking the kick. Includes the logic for applying cards that modify the ball's properties.
 - **BallActor**: Class that handles the ball's properties, including physics, goalkeeper interaction, and goal detection.
@@ -39,7 +39,7 @@ This project aims to explore the implementation of sports game mechanics, goalke
 
 ## C++ Features
 
-### 1. **Cards and Ball Properties Modification**
+### 📌 1. **Cards and Ball Properties Modification**
 The card system allows you to modify the ball's properties. Example:
 
 ```cpp
@@ -56,7 +56,7 @@ void ABallActor::ActivateFireBootsEffect()
     UE_LOG(LogTemp, Warning, TEXT("Fire Boots activated: Power = %f, PrecisionOffset = %f"), Power_shoot, PrecisionOffset);
 }
 ```
-### 2. **Goal Detection**
+### 📌 2. **Goal Detection**
 Goals are detected using a **LineTrace** in the `PerformLineTrace()` method of the `BallActor` class. If the ball crosses the goal line, it is counted as a goal.
 
 ```cpp
@@ -80,7 +80,7 @@ bHitSuccess = GetWorld()->LineTraceSingleByChannel(
         }
     }
 ```
-### 3. **Morale Points and Turns**
+### 📌 3. **Morale Points and Turns**
 Each time a player takes a penalty, morale points are added, which can be used to use cards. Turns are also managed through **GameMode**.
 
 ```cpp
@@ -98,7 +98,7 @@ if (GameplayWidgetClass)
         }
     }
 ```
-### 4. **HUD in C++**
+### 📌 4. **HUD in C++**
 The HUD displays goals, turns, and morale points using the `UUserWidget` class and a `GameState` class that manages the data.
 
 ```cpp
