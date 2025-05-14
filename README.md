@@ -40,3 +40,58 @@ void APateadorCharacter::UsarBotasDeFuego()
     BallActor->AjustarPotencia(150);
     BallActor->ReducirPrecision(15);
 }
+```
+### 2. **Detección de Goles**
+Los goles se detectan usando un **LineTrace** en el método `PerformLineTrace()` de la clase `BallActor`. Si el balón cruza la línea de gol, se contabiliza como gol.
+
+```cpp
+void ABallActor::PerformLineTrace()
+{
+    FHitResult HitResult;
+    FVector Start = GetActorLocation();
+    FVector End = Start + FVector(1000, 0, 0);
+    
+    // LineTrace para detectar goles
+    if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility))
+    {
+        if (HitResult.Actor->IsA(AGoalLine::StaticClass()))
+        {
+            // Gol detectado
+            OnGolAnotado();
+        }
+    }
+}
+```
+### 3. **Puntos de Moral y Turnos**
+Cada vez que el jugador realiza un penal, se suman puntos de moral, que pueden ser consumidos para usar cartas. Los turnos también se gestionan a través del **GameMode**.
+
+```cpp
+void APenaltiesKickGameMode::GestionarTurnos()
+{
+    Turnos++;
+    PuntosDeMoral += 2;
+    
+    if (Turnos > 2)
+    {
+        // Fin de la ronda
+    }
+}
+```
+### 4. **HUD en C++**
+El HUD muestra los goles, turnos y puntos de moral utilizando la clase `UUserWidget` y una clase `GameState` que gestiona los datos.
+
+```cpp
+void AMyGameState::ActualizarHUD()
+{
+    HUD->ActualizarGoles(GolesAnotados);
+    HUD->ActualizarTurnos(Turnos);
+    HUD->ActualizarMoral(PuntosDeMoral);
+}
+```
+## Instalación
+
+1. Clona el repositorio:
+
+```bash
+   git clone https://github.com/DidierValdivieso/PenaltiesKickPrototype.git
+```
