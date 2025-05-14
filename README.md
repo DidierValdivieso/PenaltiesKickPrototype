@@ -40,63 +40,77 @@ Este proyecto tiene como propósito explorar la implementación de mecánicas de
 El sistema de cartas permite modificar las propiedades del balón. Ejemplo:
 
 ```cpp
-void APateadorCharacter::UsarBotasDeFuego()
+void ABallActor::ActivateFireBootsEffect()
 {
-    BallActor->AjustarPotencia(150);
-    BallActor->ReducirPrecision(15);
+    Power_shoot += 150.0f;
+    PrecisionOffset = 15.0f + Power_shoot;
+
+    if (FireEffect && !FireEffect->IsActive())
+    {
+        FireEffect->Activate(true);
+    }
+
+    UE_LOG(LogTemp, Warning, TEXT("Fire Boots activated: Power = %f, PrecisionOffset = %f"), Power_shoot, PrecisionOffset);
 }
 ```
 ### 2. **Detección de Goles**
 Los goles se detectan usando un **LineTrace** en el método `PerformLineTrace()` de la clase `BallActor`. Si el balón cruza la línea de gol, se contabiliza como gol.
 
 ```cpp
-void ABallActor::PerformLineTrace()
-{
-    FHitResult HitResult;
-    FVector Start = GetActorLocation();
-    FVector End = Start + FVector(1000, 0, 0);
-    
-    // LineTrace para detectar goles
-    if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility))
+bHitSuccess = GetWorld()->LineTraceSingleByChannel(
+        HitResult,
+        RayStart,
+        RayEnd,
+        ECC_GameTraceChannel1,
+        queryParams);
+
+    if (bHitSuccess)
     {
-        if (HitResult.Actor->IsA(AGoalLine::StaticClass()))
+        DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 15.f, 12, FColor::Yellow, false, 10.0f);
+        UE_LOG(LogTemp, Warning, TEXT("¡Original impact on: %s!"), *HitResult.ImpactPoint.ToString());
+
+        bool bFueGol = HitResult.GetActor() && HitResult.GetActor()->IsA(APorteriaActor::StaticClass());
+
+        if (APenaltiesKickGameMode* GameMode = Cast<APenaltiesKickGameMode>(UGameplayStatics::GetGameMode(GetWorld())))
         {
-            // Gol detectado
-            OnGolAnotado();
+            GameMode->RegisterShotResult(bFueGol);
         }
     }
-}
 ```
 ### 3. **Puntos de Moral y Turnos**
 Cada vez que el jugador realiza un penal, se suman puntos de moral, que pueden ser consumidos para usar cartas. Los turnos también se gestionan a través del **GameMode**.
 
 ```cpp
-void APenaltiesKickGameMode::GestionarTurnos()
-{
-    Turnos++;
-    PuntosDeMoral += 2;
-    
-    if (Turnos > 2)
+if (GameplayWidgetClass)
     {
-        // Fin de la ronda
+        GameplayWidget = Cast<UGameStatsWidget>(CreateWidget<UUserWidget>(GetWorld(), GameplayWidgetClass));
+        if (GameplayWidget)
+        {
+            GameplayWidget->AddToViewport();
+            GameplayWidget->UpdateStats(GoalsScored, CurrentShot + 1, MoralPoints + 2);
+        }
+        else
+        {
+            UE_LOG(LogTemp, Error, TEXT("Failed to cast widget to UGameStatsWidget!"));
+        }
     }
-}
 ```
 ### 4. **HUD en C++**
 El HUD muestra los goles, turnos y puntos de moral utilizando la clase `UUserWidget` y una clase `GameState` que gestiona los datos.
 
 ```cpp
-void AMyGameState::ActualizarHUD()
+#include "GameStatsWidget.h"
+#include "Components/TextBlock.h"
+
+void UGameStatsWidget::UpdateStats(int32 Goals, int32 Turn, int32 Moral)
 {
-    HUD->ActualizarGoles(GolesAnotados);
-    HUD->ActualizarTurnos(Turnos);
-    HUD->ActualizarMoral(PuntosDeMoral);
+    if (GoalsText)
+        GoalsText->SetText(FText::Format(FText::FromString("Goals: {0}"), FText::AsNumber(Goals)));
+
+    if (TurnText)
+        TurnText->SetText(FText::Format(FText::FromString("Turn: {0}"), FText::AsNumber(Turn)));
+
+    if (MoralText)
+        MoralText->SetText(FText::Format(FText::FromString("Moral: {0}"), FText::AsNumber(Moral)));
 }
-```
-## Instalación
-
-Clona el repositorio:
-
-```bash
-   git clone https://github.com/DidierValdivieso/PenaltiesKickPrototype.git
 ```
