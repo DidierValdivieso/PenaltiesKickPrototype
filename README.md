@@ -2,6 +2,7 @@
 **PenaltiesKickPrototype** es un juego de simulación de penales desarrollado en **Unreal Engine 5** utilizando **C++**. El objetivo del juego es permitir al jugador realizar tiros de penal y enfrentar al portero en un entorno realista, con mecánicas de juego personalizadas, como el uso de cartas que alteran las propiedades del balón y el puntaje en las rondas de penal.
 
 Este proyecto tiene como propósito explorar la implementación de mecánicas de juegos de deportes, inteligencia artificial de portero, y el uso de cartas con efectos en las físicas del balón, todo implementado directamente en C++.
+
 ---
 
 ## 🔄 Demo en acción
@@ -9,6 +10,7 @@ Este proyecto tiene como propósito explorar la implementación de mecánicas de
 ![Gameplay Demo](TestPenaltiesKick.gif)
 
 ---
+
 ## 🛠️ Características principales
 
 - **Sistema de Penaltis**: El jugador se enfrenta a un portero y tiene que lanzar un penal. El portero reacciona a los tiros utilizando un sistema básico de IA.
